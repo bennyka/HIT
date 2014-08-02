@@ -33,7 +33,7 @@ function ListView(options) {
 
 // functions
 function fillTableViewWithFood(){
-	var f = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory,'data','food.csv');
+	var f = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory,'data','hit_lebensmittel.csv');
 	var csv = f.read();
 	var points = [];
 	var lines = csv.toString().split("\r");

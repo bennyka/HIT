@@ -15,42 +15,63 @@ var leftTableView = Ti.UI.createTableView({
 	rowHeight:40,
 	data:[
 		Titanium.UI.createTableViewRow({
-			title:'Übersicht',
-			font:{ fontSize:'18sp', fontWeight:'bold' },
+			title:'Menü',
+			font:{ fontSize:'18sp' },
 			touchEnabled:false,
 			backgroundSelectedColor:'transparent',
-			color:'#000000'
+			color:'#000000',
+			textAlign:'center',
+			height:45
 		}),
 		Titanium.UI.createTableViewRow({
 			title:'Lebensmittel',
 			font:{ fontSize:'14sp' },
 			touchEnabled:false,
-			color:'#000000'
+			color:'#000000',
+			height:30
 		}),
 		Titanium.UI.createTableViewRow({
 			title:'Medikamente',
 			font:{ fontSize:'14sp' },
 			touchEnabled:false,
-			color:'#000000'
+			color:'#000000',
+			height:30
 		}),
-		{title:''}, 
+		Titanium.UI.createTableViewRow({
+			title:'Alle',
+			font:{ fontSize:'14sp' },
+			touchEnabled:false,
+			color:'#000000',
+			height:30
+		}),
+		Titanium.UI.createTableViewRow({
+			title:'Information',
+			font:{ fontSize:'16sp', fontWeight:'bold' },
+			touchEnabled:false,
+			backgroundSelectedColor:'transparent',
+			color:'#000000',
+			height:30
+		}), 
 		Titanium.UI.createTableViewRow({
 			title:'Einstellungen',
 			font:{ fontSize:'14sp' },
 			touchEnabled:false,
-			color:'#000000'
+			color:'#000000',
+			height:30
 		}),
 		Titanium.UI.createTableViewRow({
 			title:'Erklärung',
 			font:{ fontSize:'14sp' },
 			touchEnabled:false,
-			color:'#000000'
+			color:'#000000',
+			height:30
 		}),
 		Titanium.UI.createTableViewRow({
 			title:'Impressum',
 			font:{ fontSize:'14sp' },
 			touchEnabled:false,
-			color:'#000000'
+			color:'#000000',
+			height:30
 		})   
 	]
 });
@@ -71,21 +92,28 @@ leftTableView.addEventListener("click", function(e){
 			break;
 		case 2:
 			// open medicine list
-			alert("open medicine list");
+			alert("show medicine");
 			// drawer.setCenterWindow(centerView);
 			// drawer.toggleLeftWindow(); 
 			break;
 		case 3:
 			// do nothing
+			alert("show all");
 			break;
 		case 4:
 			// do nothing
 			break;
 		case 5:
 			// do nothing
+			alert("show Settings");
 			break;
 		case 6:
 			// do nothing
+			alert("show Description");
+			break;
+		case 7:
+			// do nothing
+			alert("show Impress");
 			break;
 	}
 });
