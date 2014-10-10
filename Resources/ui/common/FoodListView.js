@@ -1,7 +1,7 @@
-function ListView(options) {
+function FoodListView(options) {
 	var self = Ti.UI.createView({
-		top:(Ti.Platform.getOsname() == "android") ? 0 : 20,
-		layout:"horizontal",
+		top:0,
+		layout:"vertical",
 		backgroundColor:'#ffffff'
 	});
 	
@@ -13,9 +13,9 @@ function ListView(options) {
 	    showCancel:false,
 	    width:Ti.UI.FILL
 	});
-
+	self.add(searchBar);
 	var listView = Ti.UI.createListView({
-		searchView:searchBar
+		search:searchBar
 	});
 	
 	var sections = [];
@@ -27,7 +27,17 @@ function ListView(options) {
 	
 	listView.sections = sections;
 	self.add(listView);
-
+	
+	listView.addEventListener("itemclick", function(e){
+		var itemData = e.section.getItemAt(e.itemIndex).properties.data;
+		//show details	
+		var DetailView = require('ui/common/DetailView');
+		var detailView = new DetailView({
+			data:itemData
+		});
+		Ti.App.fireEvent("openView",{view:detailView});
+	});
+	
 	return self;
 };
 
@@ -37,7 +47,7 @@ function fillTableViewWithFood(){
 	var csv = f.read();
 	var points = [];
 	var lines = csv.toString().split("\r");
-	
+	var headerInfo = lines[0].split(";");
 	var foodData = [];
 	
 	for (var c=0;c<lines.length;c++){
@@ -60,15 +70,24 @@ function fillTableViewWithFood(){
 	       			var color = '#30FF1500'; // very bad
 	       			break;
 	       	}
+	       	// fill data for detailview
+	       	var data = [];
+	       	for (i in headerInfo){
+	       		data.push({
+	       			'name':headerInfo[i],
+	        		'value':food[i]
+	       		});
+	       	}
+	       	// create table row
 	       	var foodName = String(food[0]).replace("/","");
-	       	
 	        foodData.push({
 	        	properties:{
 	        		title:foodName, 
 	        		backgroundColor:color, 
 	        		color:'#000000',
 	        		searchableText:foodName,
-	        		filterAttribute:foodName
+	        		filterAttribute:foodName,
+	        		data:data
 	        	}
 	        });
 	        
@@ -77,4 +96,4 @@ function fillTableViewWithFood(){
 	
 	return foodData;
 }
-module.exports = ListView;
+module.exports = FoodListView;
