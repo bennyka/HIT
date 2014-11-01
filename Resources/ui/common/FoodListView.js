@@ -1,3 +1,5 @@
+Ti.include("/lib/config.js");
+
 function FoodListView(options) {
 	var self = Ti.UI.createView({
 		top:0,
@@ -13,9 +15,15 @@ function FoodListView(options) {
 	    showCancel:false,
 	    width:Ti.UI.FILL
 	});
-	self.add(searchBar);
+	// add searchbar to self for android
+	if ( config.isAndroid ){
+		self.add(searchBar);
+	}
+	
+	
 	var listView = Ti.UI.createListView({
-		search:searchBar
+		searchView:( config.isAndroid ) ? undefined : searchBar,
+		search: ( config.isAndroid ) ? searchBar : undefined
 	});
 	
 	var sections = [];
